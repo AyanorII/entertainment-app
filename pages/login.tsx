@@ -1,12 +1,10 @@
 import { Container, Stack } from "@mui/material";
-import Image from "next/image";
 import AuthForm from "../components/auth/AuthForm";
-import { auth } from "../lib/firebase";
+import Logo from "../components/Logo/Logo";
 
 type Props = {};
 
 const login = (props: Props) => {
-
   return (
     <Container>
       <Stack
@@ -15,7 +13,7 @@ const login = (props: Props) => {
         spacing={5}
         sx={stackStyles}
       >
-        <Image src="/assets/logo.svg" width="32" height="25" alt="logo" />
+        <Logo />
         <AuthForm />
       </Stack>
     </Container>

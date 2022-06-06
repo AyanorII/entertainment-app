@@ -1,6 +1,6 @@
 import { Container, Stack } from "@mui/material";
-import Image from "next/image";
 import AuthForm from "../components/auth/AuthForm";
+import Logo from "../components/Logo/Logo";
 
 type Props = {};
 
@@ -13,7 +13,7 @@ const signup = (props: Props) => {
         spacing={5}
         sx={stackStyles}
       >
-        <Image src="/assets/logo.svg" width="32" height="25" alt="logo" />
+        <Logo />
         <AuthForm />
       </Stack>
     </Container>
