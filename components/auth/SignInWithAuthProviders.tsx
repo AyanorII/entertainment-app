@@ -1,7 +1,7 @@
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
-import { Fab, Stack, Typography } from "@mui/material";
+import { Fab, Stack, Typography, useMediaQuery } from "@mui/material";
 import {
   FacebookAuthProvider,
   getAuth,
@@ -33,6 +33,8 @@ const SignInWithAuthProviders = (props: Props) => {
     },
   ];
 
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   return (
     <div>
       <Typography
@@ -41,7 +43,8 @@ const SignInWithAuthProviders = (props: Props) => {
         color="text.secondary"
         textAlign="center"
         letterSpacing="0.5px"
-        mt={3}
+        mt={ { xs: 3, sm: 6 } }
+        fontWeight="light"
       >
         Or continue with a social profile
       </Typography>
@@ -50,13 +53,14 @@ const SignInWithAuthProviders = (props: Props) => {
         justifyContent="center"
         alignItems="center"
         my={2}
+        gap={2}
       >
         {providers.map(({ icon, provider, name }) => (
           <Fab
             key={name}
             onClick={() => signInWithPopup(auth, provider)}
-            size="small"
-            color="secondary"
+            size={isMobile ? "small" : "medium"}
+            sx={{ backgroundColor: "secondary.light", color: "text.primary", "&:hover": {color: "secondary.main"} }}
           >
             {icon}
           </Fab>

@@ -52,8 +52,20 @@ const AuthForm = () => {
   };
 
   return (
-    <Paper>
-      <Box bgcolor="secondary.main" px={3} py={5} maxWidth="sm">
+    <Paper
+      sx={{
+        backgroundColor: "transparent",
+        borderRadius: "16px",
+        overflow: "hidden",
+      }}
+    >
+      <Box
+        bgcolor="secondary.main"
+        px={{ xs: 3, sm: 5, md: 7 }}
+        py={ { xs: 5, sm: 7, md: 9 } }
+        pb={{md: 5}}
+        maxWidth="sm"
+      >
         {/* --------------------------- Heading --------------------------- */}
         <Typography
           variant="h4"
@@ -136,13 +148,15 @@ const AuthForm = () => {
               marginTop: "2.5rem",
             }}
           >
-            {loading ? (
-              <ClipLoader />
-            ) : authAction === "login" ? (
-              "Login to your account"
-            ) : (
-              "Create new account"
-            )}
+            <Typography variant="body1">
+              {loading ? (
+                <ClipLoader />
+              ) : authAction === "login" ? (
+                "Login to your account"
+              ) : (
+                "Create new account"
+              )}
+            </Typography>
           </Button>
           {/* --------------------- Submit button -------------------------- */}
         </form>

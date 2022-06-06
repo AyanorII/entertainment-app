@@ -42,7 +42,7 @@ const Navbar = (props: Props) => {
           flexDirection={{ xs: "row", lg: "column" }}
           justifyContent="space-between"
           alignItems="center"
-          minHeight={{ xs: "auto", lg: "80vh" }}
+          minHeight={{ xs: "auto", lg: "calc(100vh - 32px)" }}
           p={{ xs: 2, sm: 3 }}
         >
           {/* -------------------------- Logo ------------------------------ */}

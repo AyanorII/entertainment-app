@@ -13,6 +13,7 @@ const ChangeAuthActionLink = () => {
       letterSpacing="0.5px"
       textAlign="center"
       color="text.secondary"
+      fontWeight="light"
     >
       Don&apos;t have an account yet?{" "}
       <Link href="/signup" passHref>
@@ -37,9 +38,9 @@ const ChangeAuthActionLink = () => {
 export default ChangeAuthActionLink;
 
 const StyledLink = styled.a`
-  color: #04bbf6;
+  color: #04bbf6 !important;
 
   &::visited {
-    color: #04bbf6;
+    color: #04bbf6 !important;
   }
 `;
