@@ -1,9 +1,11 @@
-import { Box, ThemeProvider } from "@mui/material";
+import { Box, Grid, ThemeProvider } from "@mui/material";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import ClipLoader from "react-spinners/ClipLoader";
+import Navbar from "../components/Navbar/Navbar";
+import SearchBar from "../components/SearchBar/SearchBar";
 import { auth } from "../lib/firebase";
 import "../styles/globals.css";
 import theme from "../styles/Theme";
@@ -24,7 +26,19 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ClipLoader loading={loading} size={150} color="#FC4747" />
         </Box>
       ) : (
-        <Component {...pageProps} />
+        <Grid container gap={{ xs: 3, lg: 0 }}>
+          <Grid item sm={12} lg={1} sx={{ width: "100%" }}>
+            <Navbar />
+          </Grid>
+          <Grid container item xs={12} lg={11}>
+            <Grid item xs={12}>
+              <SearchBar />
+            </Grid>
+            <Grid item xs={12}>
+              <Component {...pageProps} />
+            </Grid>
+          </Grid>
+        </Grid>
       )}
     </ThemeProvider>
   );
