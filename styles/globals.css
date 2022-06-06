@@ -1,3 +1,7 @@
+body {
+  background-color: #10141E
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

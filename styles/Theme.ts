@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
-const theme = createTheme({
+let theme = createTheme({
   typography: {
     fontFamily: "Outfit, sans-serif",
   },
@@ -19,6 +19,10 @@ const theme = createTheme({
       secondary: "#ffffff75",
     },
   },
+  shape: {
+    borderRadius: 10,
+  },
 });
 
-export default theme
+theme = responsiveFontSizes(theme);
+export default theme;
