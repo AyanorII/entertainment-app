@@ -1,14 +1,15 @@
-import { Typography } from '@mui/material'
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import { signOut } from "firebase/auth";
+import type { NextPage } from "next";
+import Trending from "../components/Trending/Trending";
+import { auth } from "../lib/firebase";
 
 const Home: NextPage = () => {
   return (
-    <Typography variant="h1" color="textPrimary">
-      Hello World
-    </Typography>
-  )
-}
+    <div style={{overflowX: "hidden"}}>
+      <Trending />
+      <button onClick={() => signOut(auth)}>Sign out</button>
+    </div>
+  );
+};
 
-export default Home
+export default Home;
