@@ -1,27 +1,9 @@
-import { Container, Stack } from "@mui/material";
-import AuthForm from "../components/auth/AuthForm";
-import Logo from "../components/Logo/Logo";
+import AuthScreen from "../components/auth/AuthScreen";
 
 type Props = {};
 
 const login = (props: Props) => {
-  return (
-    <Container>
-      <Stack
-        alignItems="center"
-        justifyContent="center"
-        spacing={5}
-        sx={stackStyles}
-      >
-        <Logo />
-        <AuthForm />
-      </Stack>
-    </Container>
-  );
+  return <AuthScreen />;
 };
 
 export default login;
-
-const stackStyles = {
-  minHeight: "100vh",
-};
