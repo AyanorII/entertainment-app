@@ -1,18 +1,8 @@
-export default interface TrendingData {
-  poster_path: string;
-  adult: boolean;
-  overview: string;
-  release_date: string;
-  genre_ids: number[];
-  id: number;
-  original_title: string;
-  original_language: string;
-  title: string;
-  backdrop_path: string | null;
-  popularity: number;
-  vote_count: number;
-  video: boolean;
-  vote_average: number;
-  first_air_date: string;
-  original_name: string;
-}
+import BaseMediaData from "./BaseMediaData";
+import CurrentMovies from "./CurrentMovies";
+import CurrentSeries from "./CurrentSeries";
+
+export default interface TrendingData
+  extends BaseMediaData,
+    CurrentMovies,
+    CurrentSeries {}
