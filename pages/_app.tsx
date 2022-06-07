@@ -1,4 +1,4 @@
-import { Box, Grid, ThemeProvider } from "@mui/material";
+import { Box, GlobalStyles, Grid, ThemeProvider } from "@mui/material";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -22,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyles styles={styles} />
       {loading && (
         <Box sx={{ height: "100vh", display: "grid", placeItems: "center" }}>
           <ClipLoader loading={loading} size={150} color="#FC4747" />
@@ -29,12 +30,19 @@ function MyApp({ Component, pageProps }: AppProps) {
       )}
       {!user && <AuthScreen />}
       {user && (
-        <Grid container gap={{ xs: 3, lg: 0 }}>
-          <Grid item sm={12} lg={1} sx={{ width: "100%" }}>
+        <Grid container spacing={{ xs: 3, lg: 14 }}>
+          <Grid item sm={12} lg={1} position="relative">
             <Navbar />
           </Grid>
-          <Grid container item xs={12} lg={11} gap={2}>
-            <Grid item xs={12}>
+          <Grid
+            container
+            item
+            xs={12}
+            lg={11}
+            gap={3}
+            marginTop={{ xs: 7, sm: 15, lg: 6 }}
+          >
+            <Grid item xs={12} justifyContent="start">
               <SearchBar />
             </Grid>
             <Grid item xs={12}>
@@ -48,3 +56,17 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
+
+const styles = {
+  "*::-webkit-scrollbar": {
+    width: 10,
+    height: 10,
+  },
+  "*::-webkit-scrollbar-track": {
+    boxShadow: `inset 0 0 6px rgba(0,0,0,0.3)`,
+  },
+  "*::-webkit-scrollbar-thumb": {
+    backgroundColor: "#3c455f",
+    borderRadius: "8px",
+  },
+};

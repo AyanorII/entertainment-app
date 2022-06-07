@@ -2,9 +2,7 @@ import { Stack } from "@mui/material";
 import Container from "@mui/material/Container";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {
-  default as TrendingData,
-} from "../../lib/types/TrendingData";
+import { default as TrendingData } from "../../lib/types/TrendingData";
 import Card from "../Card/Card";
 import Heading from "../Heading";
 
@@ -48,11 +46,9 @@ const Trending = () => {
     getTrending();
   }, []);
 
-  console.log(trendingData);
-
   return (
     <>
-      <Container>
+      <Container maxWidth={false}>
         <Heading>Trending</Heading>
       </Container>
       <Stack
@@ -61,7 +57,7 @@ const Trending = () => {
         minWidth="100vw"
         justifyContent="space-between"
         alignItems="center"
-        gap={ 2 }
+        gap={2}
         padding={{ xs: 2, sm: 3 }}
       >
         {trendingData &&
@@ -82,9 +78,9 @@ const Trending = () => {
                 title={title || originalName}
                 releaseDate={releaseDate || firstAirDate}
                 rating={rating}
-                image={image}
-                id={id}
+                image={image || ""}
                 isBookmarked={false}
+                big
               />
             );
           })}

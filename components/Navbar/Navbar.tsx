@@ -30,9 +30,20 @@ const Navbar = (props: Props) => {
   ];
 
   const isMobile = useMediaQuery("(max-width: 600px)");
+  const isDesktop = useMediaQuery("(min-width: 1200px)");
 
   return (
-    <Container disableGutters={isMobile}>
+    <Container
+      disableGutters={isMobile}
+      sx={{
+        position: "fixed",
+        top: 0,
+        zIndex: 10000,
+        width: isDesktop ? "auto" : "100%",
+        backdropFilter: "blur(5px)"
+
+      }}
+    >
       <Box
         bgcolor="secondary.main"
         mt={{ sm: 2 }}
@@ -43,7 +54,8 @@ const Navbar = (props: Props) => {
           justifyContent="space-between"
           alignItems="center"
           minHeight={{ xs: "auto", lg: "calc(100vh - 32px)" }}
-          p={{ xs: 2, sm: 3 }}
+          p={ { xs: 2, sm: 3 } }
+          py={{lg: 5}}
         >
           {/* -------------------------- Logo ------------------------------ */}
           <Logo />

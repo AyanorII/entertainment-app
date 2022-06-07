@@ -1,16 +1,18 @@
 import SearchIcon from "@mui/icons-material/Search";
-import { Container, InputAdornment } from "@mui/material";
+import { Container, InputAdornment, useMediaQuery } from "@mui/material";
 import Input from "@mui/material/Input";
 
 type Props = {};
 
 const SearchBar = (props: Props) => {
+  const isMobile = useMediaQuery("(max-width: 600px)");
+
   return (
-    <Container>
+    <Container maxWidth={false}>
       <Input
         placeholder="Search for movies or TV series"
-        fullWidth
-        sx={{
+        sx={ {
+          minWidth: isMobile ? "100%" : "400px",
           "&.MuiInputBase-root::after": {
             borderBottomColor: "#fff",
           },
@@ -18,7 +20,7 @@ const SearchBar = (props: Props) => {
         inputProps={{
           sx: {
             "&::placeholder": {
-              color: "text.secondary",
+              color: "text.primary",
               fontSize: "1rem",
               letterSpacing: "0.25px",
               fontWeight: "light",

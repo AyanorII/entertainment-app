@@ -5,22 +5,22 @@ type Props = {
   releaseDate: string;
   title: string;
   rating: number;
-  positionAbsolute: boolean;
+  big: boolean;
 };
 
 const CardContent = ({
   releaseDate,
   title,
   rating,
-  positionAbsolute,
+  big,
 }: Props) => {
   return (
     <Stack
       sx={{
-        position: positionAbsolute ? "absolute" : "static",
+        position: big ? "absolute" : "static",
         bottom: "0",
         zIndex: 1,
-        padding: "10px",
+        padding: big ? "10px" : "1rem 0 0",
       }}
     >
       <Stack flexDirection="row" alignItems="center" gap={3}>
@@ -35,7 +35,7 @@ const CardContent = ({
             textShadow: "0 0 5px 5px #000",
           }}
         >
-          { releaseDate.split("-")[0] }
+          {releaseDate.split("-")[0]}
         </Typography>
         {/* ----------------------- Release year ------------------------- */}
         {/* -------------------------- Rating ---------------------------- */}
@@ -49,17 +49,24 @@ const CardContent = ({
             textShadow: "0 0 5px 5px #000",
           }}
         >
-          {rating} <StarOutlinedIcon fontSize="inherit" sx={{position: "relative", top: "2px"}}/>
+          {rating}{" "}
+          <StarOutlinedIcon
+            fontSize="inherit"
+            sx={{ position: "relative", top: "2px" }}
+          />
         </Typography>
         {/* -------------------------- Rating ---------------------------- */}
       </Stack>
+      {/* --------------------------- Title ------------------------------ */}
       <Typography
         variant="body1"
         color="text.primary"
+        letterSpacing={0.75}
         sx={{ backgroundColor: "transparent", textShadow: "0 0 5px 5px #000" }}
       >
         {title}
       </Typography>
+      {/* --------------------------- Title ------------------------------ */}
     </Stack>
   );
 };
