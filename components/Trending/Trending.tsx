@@ -74,7 +74,9 @@ const Trending = () => {
 
             return (
               <Card
-                key={id}
+                key={ id }
+                id={ id }
+                mediaType={firstAirDate ? "tv" : "movie"}
                 title={title || originalName}
                 releaseDate={releaseDate || firstAirDate}
                 rating={rating}

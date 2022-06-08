@@ -77,6 +77,8 @@ const RecommendedForYou = (props: Props) => {
           return (
             <Grid key={id} item xs={6} md={4} lg={3} xl={2}>
               <Card
+                id={ id }
+                mediaType={firstAirDate ? "tv" : "movie"}
                 image={posterPath || ""}
                 title={title || name}
                 rating={voteAverage}

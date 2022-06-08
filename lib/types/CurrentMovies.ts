@@ -7,5 +7,4 @@ export default interface CurrentMovies extends BaseMediaData {
   title: string;
   video: boolean;
   release_date: string;
-
 }
