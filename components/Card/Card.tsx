@@ -1,9 +1,8 @@
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import { Box, Fab, Paper } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
+import BookmarkButton from "../BookmarkButton/BookmarkButton";
 import CardContent from "./CardContent";
 
 type Props = {
@@ -36,26 +35,29 @@ const Card = ({
   };
 
   return (
-    <Link
-      href={`/${mediaType === "tv" ? "tv-series" : "movies"}/${id}`}
+    <Box
+      position="relative"
+      marginBottom={{ xs: 2, md: 0 }}
+      sx={{
+        cursor: "pointer",
+        "&:hover .overlay": {
+          opacity: 0,
+        },
+        "& .card-image": {
+          transition: "all 0.3s ease-in-out",
+        },
+        "&:hover .card-image": {
+          transform: "scale(1.05)",
+        },
+      }}
     >
-      <Box
-        position="relative"
-        marginBottom={{ xs: 2, md: 0 }}
-        sx={ {
-          cursor: "pointer",
-          "&:hover .overlay": {
-            opacity: 0,
-          },
-          "& .card-image": {
-            transition: "all 0.3s ease-in-out",
-          },
-          "&:hover .card-image": {
-            transform: "scale(1.05)",
-          },
-        }}
-      >
-        <>
+      <BookmarkButton
+        isBookmarked={isBookmarked}
+        id={id}
+        mediaType={mediaType}
+      />
+      <Link href={`/${mediaType === "movie" ? "movies" : "tv"}/${id}`} passHref>
+        <a>
           <Paper elevation={15} sx={PaperStyles}>
             <Image
               src={"https://image.tmdb.org/t/p/original" + image}
@@ -64,13 +66,6 @@ const Card = ({
               alt={title}
               className="card-image"
             />
-            <Fab sx={FabStyles}>
-              {isBookmarked ? (
-                <BookmarkIcon />
-              ) : (
-                <BookmarkBorderIcon sx={{ fontSize: "20px" }} />
-              )}
-            </Fab>
             <Overlay className="overlay" />
           </Paper>
           <CardContent
@@ -79,9 +74,9 @@ const Card = ({
             releaseDate={releaseDate}
             big={big || false}
           />
-        </>
-      </Box>
-    </Link>
+        </a>
+      </Link>
+    </Box>
   );
 };
 
@@ -94,13 +89,3 @@ const Overlay = styled.div`
   opacity: 0.5;
   transition: all 0.3s ease-in-out;
 `;
-
-const FabStyles = {
-  position: "absolute",
-  top: "10px",
-  right: "10px",
-  backgroundColor: "#00000075",
-  color: "#FFF",
-  width: "35px",
-  height: "35px",
-};

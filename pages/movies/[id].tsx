@@ -1,11 +1,7 @@
-import { Container, Grid } from "@mui/material";
 import axios from "axios";
 import { GetStaticProps, NextPage } from "next";
-import Image from "next/image";
-import GoBackButton from "../../components/GoBackButton";
-import MovieInfo from "../../components/MoviePage/MovieInfo";
-import Overview from "../../components/MoviePage/Overview";
-import Similar from "../../components/MoviePage/Similar";
+import Details from "../../components/Details/Details";
+import useBookmarks from "../../lib/hooks/useBookmarks";
 import CurrentMovies from "../../lib/types/CurrentMovies";
 import MovieDetails from "../../lib/types/MovieDetails";
 
@@ -50,7 +46,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const data = response.data as MovieDetails;
 
   const similarMoviesResponse = await axios(similarMoviesUrl, { headers });
-  const similarMoviesData = similarMoviesResponse.data.results as CurrentMovies[];
+  const similarMoviesData = similarMoviesResponse.data
+    .results as CurrentMovies[];
 
   return {
     props: {
@@ -61,71 +58,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 const Movie: NextPage<Props> = ({ movie, similarMovies }) => {
-  const {
-    poster_path: image,
-    title,
-    overview,
-    release_date: releaseDate,
-    vote_average: rating,
-    runtime,
-    budget,
-    revenue,
-    genres,
-    tagline,
-    production_countries: productionCountries,
-    id,
-  } = movie;
+  const { bookmarks } = useBookmarks();
+
+  const isBookmarked = Boolean(
+    bookmarks.find((bookmark) => bookmark.id === movie.id)
+  );
+
   return (
-    <Container maxWidth={ false }>
-      <GoBackButton />
-      <Grid container gap={5}>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          position="relative"
-          height="calc(50vh + 30vw)"
-          maxHeight="80vh"
-        >
-          <Image
-            src={"https://image.tmdb.org/t/p/original" + image || ""}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-            alt={title}
-            style={{ borderRadius: 8 }}
-          />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          md={5}
-          container
-          rowGap={{ xs: 5, xl: 0 }}
-          alignItems="center"
-        >
-          <Grid item xs={12}>
-            <Overview
-              title={title}
-              rating={rating}
-              tagline={tagline!}
-              overview={overview}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <MovieInfo
-              genres={genres}
-              releaseDate={releaseDate}
-              runtime={runtime}
-              budget={budget}
-              revenue={revenue}
-              productionCountries={productionCountries}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-      <Similar similarMovies={similarMovies} />
-    </Container>
+    <Details
+      movie={movie}
+      similarMovies={similarMovies}
+      isBookmarked={isBookmarked}
+    />
   );
 };
 

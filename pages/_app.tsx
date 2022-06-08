@@ -8,24 +8,25 @@ import AuthScreen from "../components/auth/AuthScreen";
 import Navbar from "../components/Navbar/Navbar";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { auth } from "../lib/firebase";
+import useBookmarks from "../lib/hooks/useBookmarks";
 import "../styles/globals.css";
 import theme from "../styles/Theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const pathname = router.asPath;
-  const [user, loading, error] = useAuthState(auth as any);
+  const [user, userLoading, userError] = useAuthState(auth as any);
 
   useEffect(() => {
-    if (!user && !loading && pathname !== "/signup") router.push("/login");
-  }, [pathname, loading]);
+    if (!user && !userLoading && pathname !== "/signup") router.push("/login");
+  }, [pathname, userLoading]);
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles styles={styles} />
-      {loading && (
+      {userLoading && (
         <Box sx={{ height: "100vh", display: "grid", placeItems: "center" }}>
-          <ClipLoader loading={loading} size={150} color="#FC4747" />
+          <ClipLoader loading={userLoading} size={150} color="#FC4747" />
         </Box>
       )}
       {!user && <AuthScreen />}

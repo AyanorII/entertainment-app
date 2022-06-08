@@ -2,6 +2,7 @@ import { Stack } from "@mui/material";
 import Container from "@mui/material/Container";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import useBookmarks from "../../lib/hooks/useBookmarks";
 import { default as TrendingData } from "../../lib/types/TrendingData";
 import Card from "../Card/Card";
 import Heading from "../Heading";
@@ -46,6 +47,8 @@ const Trending = () => {
     getTrending();
   }, []);
 
+  const { bookmarks } = useBookmarks();
+
   return (
     <>
       <Container maxWidth={false}>
@@ -72,16 +75,20 @@ const Trending = () => {
               first_air_date: firstAirDate,
             } = item;
 
+            const isBookmarked = Boolean(
+              bookmarks.find((bookmark) => bookmark.id === id)
+            );
+
             return (
               <Card
-                key={ id }
-                id={ id }
+                key={id}
+                id={id}
                 mediaType={firstAirDate ? "tv" : "movie"}
                 title={title || originalName}
                 releaseDate={releaseDate || firstAirDate}
                 rating={rating}
                 image={image || ""}
-                isBookmarked={false}
+                isBookmarked={isBookmarked}
                 big
               />
             );
