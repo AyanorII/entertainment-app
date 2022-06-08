@@ -19,12 +19,16 @@ const BookmarkButton = ({ isBookmarked, id, mediaType }: Props) => {
   const handleBookmark = async () => {
     if (bookmark) {
       await firestore.doc(`bookmarks/${user?.uid}`).set({
+        id: user?.uid,
         bookmarks: [...bookmarks.filter((bk) => bk.id !== id)],
       });
     } else {
       await firestore
         .doc(`bookmarks/${user?.uid}`)
-        .set({ bookmarks: [...bookmarks, { id, media: mediaType }] });
+        .set({
+          id: user?.uid,
+          bookmarks: [...bookmarks, { id, media: mediaType }],
+        });
     }
   };
 
@@ -47,7 +51,11 @@ const FabStyles = {
   right: "10px",
   backgroundColor: "#00000075",
   color: "#FFF",
-  width: "35px",
-  height: "35px",
+  width: "40px",
+  height: "40px",
   zIndex: 20,
+
+  "&:hover": {
+    backgroundColor: "#000000",
+  },
 };

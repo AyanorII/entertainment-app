@@ -58,7 +58,7 @@ const Similar = ({ similarMovies, similarShows }: Props) => {
             } = movie;
 
             return (
-              <Grid key={id} item xs={6} sm={4} lg={3} xl={2}>
+              <Grid key={id} item xs={6} sm={4} lg={3}>
                 <Card
                   id={id}
                   image={image!}
@@ -66,7 +66,7 @@ const Similar = ({ similarMovies, similarShows }: Props) => {
                   releaseDate={releaseDate}
                   title={name}
                   isBookmarked={false}
-                  mediaType="movie"
+                  mediaType="tv"
                 />
               </Grid>
             );

@@ -12,9 +12,10 @@ const NavLink = ({ href, iconSrc }: Props) => {
   const router = useRouter();
   const pathname = router.asPath;
 
-  const imageFilter = {
+  const imageStyles = {
     transition: "all 0.35s ease-in-out",
     filter: pathname === href ? "invert(1) brightness(100)" : "unset",
+    cursor: "pointer"
   };
 
   const isMobile = useMediaQuery("(max-width: 600px)");
@@ -23,13 +24,13 @@ const NavLink = ({ href, iconSrc }: Props) => {
   const height = isMobile ? "16px" : "20px";
 
   return (
-    <Link href={href}>
+    <Link href={href} style={{cursor: "pointer"}}>
       <Image
         src={iconSrc}
         width={width}
         height={height}
         alt={href}
-        style={imageFilter}
+        style={ imageStyles }
       />
     </Link>
   );

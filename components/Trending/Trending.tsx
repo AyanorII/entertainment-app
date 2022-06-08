@@ -22,7 +22,7 @@ const Trending = () => {
       const url = "https://api.themoviedb.org/3/trending/all/day";
       const headers = {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMGNmMmMzOWQ1YmJlMWMyZmYwNzZhNzc3ZWIxNTA3YSIsInN1YiI6IjYyMGUwZWM5MWFkOTNiMDA2ZmQzMmJmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.PBIteS8CUuR5kanbGmNtWjHGeZnE-jzjVyTKKjhF_qs`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_TOKEN}`,
       };
       try {
         const response = await axios(url, {
@@ -61,7 +61,8 @@ const Trending = () => {
         justifyContent="space-between"
         alignItems="center"
         gap={2}
-        padding={{ xs: 2, sm: 3 }}
+        padding={ { xs: 2, sm: 3 } }
+        paddingTop={{sm: 0}}
       >
         {trendingData &&
           trendingData.slice(0, 10).map((item: TrendingData) => {

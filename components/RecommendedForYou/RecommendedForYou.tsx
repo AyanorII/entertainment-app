@@ -1,6 +1,7 @@
 import { Container, Grid } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import useBookmarks from "../../lib/hooks/useBookmarks";
 import CurrentMovies from "../../lib/types/CurrentMovies";
 import CurrentSeries from "../../lib/types/CurrentSeries";
 import Recommended from "../../lib/types/Recommended";
@@ -55,9 +56,11 @@ const RecommendedForYou = (props: Props) => {
     getData();
   }, []);
 
+  const {bookmarks} = useBookmarks();
+
   return (
     <Container maxWidth={false} sx={{marginTop: 5}}>
-      <Heading sx={{marginBottom: 4}}>Recommended for you</Heading>
+      <Heading>Recommended for you</Heading>
       <Grid
         container
         spacing={ { xs: 2, sm: 3, md: 4 } }
@@ -74,8 +77,10 @@ const RecommendedForYou = (props: Props) => {
             first_air_date: firstAirDate,
           } = item;
 
+          const isBookmarked = Boolean(bookmarks.find(bookmark => bookmark.id === id));
+
           return (
-            <Grid key={id} item xs={6} md={4} lg={3} xl={2}>
+            <Grid key={id} item xs={12} sm={6} md={4} lg={3}>
               <Card
                 id={ id }
                 mediaType={firstAirDate ? "tv" : "movie"}
@@ -83,7 +88,7 @@ const RecommendedForYou = (props: Props) => {
                 title={title || name}
                 rating={voteAverage}
                 releaseDate={release_date || firstAirDate}
-                isBookmarked={false}
+                isBookmarked={isBookmarked}
               />
             </Grid>
           );

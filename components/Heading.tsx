@@ -9,11 +9,12 @@ type Props = {
 const Heading = ({ children, subHeading, sx }: Props) => {
   return (
     <Typography
-      variant="h5"
+      variant="h4"
       component={subHeading ? "h2" : "h1"}
       color="text.primary"
       fontWeight="light"
-      sx={sx}
+      sx={ sx }
+      marginBottom={ subHeading ? 2 : 4 }
     >
       {children}
     </Typography>

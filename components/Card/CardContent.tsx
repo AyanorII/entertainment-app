@@ -1,4 +1,6 @@
+import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
+import TvIcon from "@mui/icons-material/Tv";
 import { Stack, Typography } from "@mui/material";
 
 type Props = {
@@ -6,14 +8,10 @@ type Props = {
   title: string;
   rating: number;
   big: boolean;
+  mediaType: "movie" | "tv";
 };
 
-const CardContent = ({
-  releaseDate,
-  title,
-  rating,
-  big,
-}: Props) => {
+const CardContent = ({ releaseDate, title, rating, big, mediaType }: Props) => {
   return (
     <Stack
       sx={{
@@ -49,13 +47,48 @@ const CardContent = ({
             textShadow: "0 0 5px 5px #000",
           }}
         >
-          {rating}{" "}
+          {rating.toFixed(1)}{" "}
           <StarOutlinedIcon
             fontSize="inherit"
             sx={{ position: "relative", top: "2px" }}
           />
         </Typography>
-        {/* -------------------------- Rating ---------------------------- */}
+        {/* -------------------------- Rating ------------------------------ */}
+        {/* --------------------------- Type --------------------------------*/}
+        <Typography
+          variant="body2"
+          component="body"
+          color="#FFFFFF"
+          fontWeight="light"
+          sx={{
+            backgroundColor: "transparent",
+            textShadow: "0 0 5px 5px #000",
+            position: "relative",
+            bottom: "2px"
+          }}
+        >
+          {mediaType === "movie" ? (
+            <LocalMoviesIcon
+              sx={{
+                fontSize: "18px",
+                position: "relative",
+                top: "4px",
+                marginRight: "6px",
+              }}
+            />
+          ) : (
+            <TvIcon
+              sx={{
+                fontSize: "18px",
+                position: "relative",
+                top: "4px",
+                marginRight: "6px",
+              }}
+            />
+          )}
+          {mediaType === "movie" ? "Movie" : "TV Show"}
+        </Typography>
+        {/* --------------------------- Type --------------------------------*/}
       </Stack>
       {/* --------------------------- Title ------------------------------ */}
       <Typography

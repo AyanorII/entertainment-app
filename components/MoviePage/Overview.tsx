@@ -28,7 +28,10 @@ const Overview = ({ title, rating, tagline, overview }: Props) => {
             color="text.secondary"
             fontWeight="light"
           >
-            <Stack flexDirection="row" gap={1}>
+            <Stack flexDirection="row" alignItems="center" gap={ 1 } sx={ {
+              position: "relative",
+              top: {xs: 0, sm: "4px"},
+            }}>
               {rating}{" "}
               <StarIcon
                 sx={{

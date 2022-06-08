@@ -7,7 +7,7 @@ import TvShowDetails from "../../lib/types/TvShowDetails";
 import BookmarkButton from "../BookmarkButton/BookmarkButton";
 import GoBackButton from "../GoBackButton";
 import Overview from "../MoviePage/Overview";
-import Similar from "../MoviePage/Similar";
+import Similar from "./Similar";
 import Info from "./Info";
 
 type Props = {

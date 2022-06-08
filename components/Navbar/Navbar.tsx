@@ -20,7 +20,7 @@ const Navbar = (props: Props) => {
       iconSrc: "/assets/icon-nav-movies.svg",
     },
     {
-      href: "/tv-series",
+      href: "/tv",
       iconSrc: "/assets/icon-nav-tv-series.svg",
     },
     {
@@ -41,7 +41,6 @@ const Navbar = (props: Props) => {
         zIndex: 10000,
         width: isDesktop ? "auto" : "100%",
         backdropFilter: "blur(5px)"
-
       }}
     >
       <Box

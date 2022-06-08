@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       )}
       {!user && <AuthScreen />}
       {user && (
-        <Grid container spacing={{ xs: 3, lg: 14 }}>
+        <Grid container spacing={{ xs: 3, lg: 0 }}>
           <Grid item sm={12} lg={1} position="relative">
             <Navbar />
           </Grid>

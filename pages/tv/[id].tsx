@@ -1,5 +1,6 @@
 import axios from "axios";
 import { GetStaticProps, NextPage } from "next";
+import { useRouter } from "next/router";
 import Details from "../../components/Details/Details";
 import useBookmarks from "../../lib/hooks/useBookmarks";
 import CurrentSeries from "../../lib/types/CurrentSeries";
@@ -58,8 +59,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 const TvShow: NextPage<Props> = ({ tvShow, similarShows }) => {
   const { bookmarks } = useBookmarks();
+  const router= useRouter();
 
-  const isBookmarked = Boolean(bookmarks.find((bookmark) => bookmark.id === tvShow.id));
+  const id = router.query.id as string;
+
+  const isBookmarked = Boolean(
+    bookmarks.find((bookmark) => bookmark.id === Number(id))
+  );
 
   return (
     <Details
