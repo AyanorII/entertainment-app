@@ -31,8 +31,8 @@ const Card = ({
     // minHeight: { xs: "140px", sm: "230px" },
     overflow: "hidden",
     backgroundColor: "transparent",
-    minWidth: { xs: big ? "300px" : "100%", sm: big ? "470px" : "100%" },
-    minHeight: { xs: big ? "250px" : "140px", sm: big ? "230px" : "100%" },
+    minWidth: { xs: big ? "375px" : "100%", sm: big ? "470px" : "100%", md: big ? "700px" : "100%" },
+    minHeight: { xs: big ? "250px" : "140px", sm: big ? "350px" : "250px" },
   };
 
   return (

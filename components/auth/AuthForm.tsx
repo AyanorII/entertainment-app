@@ -1,9 +1,10 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Controller, useForm } from "react-hook-form";
 import ClipLoader from "react-spinners/ClipLoader";
-import { auth } from "../../lib/firebase";
+import { auth, firestore } from "../../lib/firebase";
 import ChangeAuthActionLink from "./ChangeAuthActionLink";
 import ErrorMessage from "./ErrorMessage";
 import SignInWithAuthProviders from "./SignInWithAuthProviders";
@@ -11,6 +12,7 @@ import SignInWithAuthProviders from "./SignInWithAuthProviders";
 const AuthForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<null | string>(null);
+  const [user, loadingUser, errorUser] = useAuthState(auth as any);
 
   const {
     control,
@@ -25,11 +27,14 @@ const AuthForm = () => {
 
   const router = useRouter();
 
+  // Redirect to initial page if logged in
   useEffect(() => {
     if (auth.currentUser) router.push("/");
   }, [auth.currentUser, router.asPath]);
 
-  const authAction = router.asPath.includes("login") ? "login" : "signup";
+  const pathname = router.asPath
+
+  const authAction = pathname.includes("login") ? "login" : "signup";
 
   const onSubmit = async (data: any) => {
     const { email, password } = data;
@@ -40,6 +45,11 @@ const AuthForm = () => {
         await auth.signInWithEmailAndPassword(email, password);
       } else {
         await auth.createUserWithEmailAndPassword(email, password);
+        // Creates a new user in the database
+        firestore.doc(`bookmarks/${auth.currentUser!.uid}`).set({
+          bookmarks: [],
+          id: auth.currentUser!.uid,
+        });
       }
       router.push("/");
     } catch (err: unknown) {
@@ -50,6 +60,10 @@ const AuthForm = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    setError(null)
+  },[pathname])
 
   return (
     <Paper
@@ -62,8 +76,8 @@ const AuthForm = () => {
       <Box
         bgcolor="secondary.main"
         px={{ xs: 3, sm: 5, md: 7 }}
-        py={ { xs: 5, sm: 7, md: 9 } }
-        pb={{md: 5}}
+        py={{ xs: 5, sm: 7, md: 9 }}
+        pb={{ md: 5 }}
         maxWidth="sm"
       >
         {/* --------------------------- Heading --------------------------- */}
@@ -162,7 +176,7 @@ const AuthForm = () => {
         </form>
         {/* ---------------------------- Form ------------------------------ */}
         {/* -------------------------- Providers --------------------------- */}
-        <SignInWithAuthProviders />
+        <SignInWithAuthProviders setError={setError}/>
         {/* -------------------------- Providers --------------------------- */}
         <ChangeAuthActionLink />
       </Box>

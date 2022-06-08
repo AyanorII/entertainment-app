@@ -10,9 +10,11 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-type Props = {};
+type Props = {
+  setError: (error: string) => void;
+};
 
-const SignInWithAuthProviders = (props: Props) => {
+const SignInWithAuthProviders = ({ setError }: Props) => {
   const auth = getAuth();
 
   const providers = [
@@ -35,6 +37,16 @@ const SignInWithAuthProviders = (props: Props) => {
 
   const isMobile = useMediaQuery("(max-width:600px)");
 
+  const handleSignIn = async (provider: any) => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      }
+    }
+  };
+
   return (
     <div>
       <Typography
@@ -43,7 +55,7 @@ const SignInWithAuthProviders = (props: Props) => {
         color="text.secondary"
         textAlign="center"
         letterSpacing="0.5px"
-        mt={ { xs: 3, sm: 6 } }
+        mt={{ xs: 3, sm: 6 }}
         fontWeight="light"
       >
         Or continue with a social profile
@@ -58,9 +70,13 @@ const SignInWithAuthProviders = (props: Props) => {
         {providers.map(({ icon, provider, name }) => (
           <Fab
             key={name}
-            onClick={() => signInWithPopup(auth, provider)}
+            onClick={async () => handleSignIn(provider)}
             size={isMobile ? "small" : "medium"}
-            sx={{ backgroundColor: "secondary.light", color: "text.primary", "&:hover": {color: "secondary.main"} }}
+            sx={{
+              backgroundColor: "secondary.light",
+              color: "text.primary",
+              "&:hover": { color: "secondary.main" },
+            }}
           >
             {icon}
           </Fab>

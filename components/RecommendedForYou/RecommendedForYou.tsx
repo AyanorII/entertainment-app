@@ -88,7 +88,7 @@ const RecommendedForYou = (props: Props) => {
                 title={title || name}
                 rating={voteAverage}
                 releaseDate={release_date || firstAirDate}
-                isBookmarked={isBookmarked}
+                isBookmarked={ isBookmarked }
               />
             </Grid>
           );

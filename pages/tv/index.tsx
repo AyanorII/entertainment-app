@@ -44,7 +44,7 @@ const TVSeries: NextPage<Props> = (tvSeries) => {
           );
 
           return (
-            <Grid xs={6} md={4} lg={3} item key={id} spacing={5}>
+            <Grid xs={12} sm={6} md={4} lg={3} item key={id} spacing={5}>
               <Card
                 image={poster_path!}
                 title={name}
