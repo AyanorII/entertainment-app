@@ -28,10 +28,13 @@ const Card = ({
 }: Props) => {
   const PaperStyles = {
     position: "relative",
-    // minHeight: { xs: "140px", sm: "230px" },
     overflow: "hidden",
     backgroundColor: "transparent",
-    minWidth: { xs: big ? "375px" : "100%", sm: big ? "470px" : "100%", md: big ? "700px" : "100%" },
+    minWidth: {
+      xs: big ? "375px" : "100%",
+      sm: big ? "470px" : "100%",
+      md: big ? "700px" : "100%",
+    },
     minHeight: { xs: big ? "250px" : "140px", sm: big ? "350px" : "250px" },
   };
 
@@ -58,14 +61,16 @@ const Card = ({
         mediaType={mediaType}
       />
       <Link href={`/${mediaType === "movie" ? "movies" : "tv"}/${id}`} passHref>
-        <a style={{textDecoration: "none"}}>
+        <a style={{ textDecoration: "none" }}>
           <Paper elevation={15} sx={PaperStyles}>
             <Image
               src={"https://image.tmdb.org/t/p/original" + image}
               layout="fill"
               objectFit="cover"
+              objectPosition={big ? "center" : "50% 20%"}
               alt={title}
               className="card-image"
+              priority
             />
             <Overlay className="overlay" />
           </Paper>
@@ -73,7 +78,7 @@ const Card = ({
             title={title}
             rating={rating}
             releaseDate={releaseDate}
-            big={ big || false }
+            big={big || false}
             mediaType={mediaType}
           />
         </a>

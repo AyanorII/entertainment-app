@@ -15,7 +15,11 @@ const NavLink = ({ href, iconSrc }: Props) => {
   const imageStyles = {
     transition: "all 0.35s ease-in-out",
     filter: pathname === href ? "invert(1) brightness(100)" : "unset",
-    cursor: "pointer"
+    cursor: "pointer",
+
+    "&:hover *": {
+      filter: "invert(1) brightness(100)",
+    }
   };
 
   const isMobile = useMediaQuery("(max-width: 600px)");
@@ -24,14 +28,16 @@ const NavLink = ({ href, iconSrc }: Props) => {
   const height = isMobile ? "16px" : "20px";
 
   return (
-    <Link href={href} style={{cursor: "pointer"}}>
-      <Image
-        src={iconSrc}
-        width={width}
-        height={height}
-        alt={href}
-        style={ imageStyles }
-      />
+    <Link href={href} style={{ cursor: "pointer" }} passHref>
+      <a>
+        <Image
+          src={iconSrc}
+          width={width}
+          height={height}
+          alt={href}
+          style={imageStyles}
+        />
+      </a>
     </Link>
   );
 };

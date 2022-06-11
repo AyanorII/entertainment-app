@@ -1,13 +1,8 @@
-import { Container, Grid } from "@mui/material";
-import useMoviesAndShows from "../../lib/hooks/useMoviesAndShows";
-import useBookmarks from "../../lib/hooks/useBookmarks";
-import Card from "../Card/Card";
-import Heading from "../Heading";
+import React from 'react'
 
-const RecommendedForYou = () => {
-  const { bookmarks } = useBookmarks();
-  const { allData } = useMoviesAndShows();
+type Props = {}
 
+const GridLayout = (props: Props) => {
   return (
     <Container maxWidth={false} sx={{ marginTop: 5 }}>
       <Heading>Recommended for you</Heading>
@@ -44,6 +39,6 @@ const RecommendedForYou = () => {
       </Grid>
     </Container>
   );
-};
+}
 
-export default RecommendedForYou;
+export default GridLayout

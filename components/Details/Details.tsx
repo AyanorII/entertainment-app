@@ -26,7 +26,7 @@ const Details = ({
   isBookmarked,
 }: Props) => {
   return (
-    <Container maxWidth={false}>
+    <Container maxWidth={false} sx={{paddingRight: {xl: 6}}}>
       <GoBackButton />
       <Grid container gap={10}>
         <Grid

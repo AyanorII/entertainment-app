@@ -1,7 +1,7 @@
 import { SxProps, Typography } from "@mui/material";
 
 type Props = {
-  children: string;
+  children: string | React.ReactNode;
   subHeading?: boolean;
   sx?: SxProps;
 };

@@ -1,42 +1,55 @@
-import { Container, Grid, useMediaQuery } from '@mui/material';
-import axios from 'axios';
-import { NextPage } from 'next';
-import React from 'react'
-import Card from '../../components/Card/Card';
-import Heading from '../../components/Heading';
-import useBookmarks from '../../lib/hooks/useBookmarks';
-import CurrentSeries from '../../lib/types/CurrentSeries';
+import { Container, Grid, useMediaQuery } from "@mui/material";
+import axios from "axios";
+import { NextPage } from "next";
+import Card from "../../components/Card/Card";
+import Heading from "../../components/Heading";
+import useBookmarks from "../../lib/hooks/useBookmarks";
+import CurrentSeries from "../../lib/types/CurrentSeries";
 
 type Props = {
   tvSeries: CurrentSeries[];
-}
+  searchTerm: string;
+};
 
 export const getStaticProps = async () => {
-  const url = "https://api.themoviedb.org/3/tv/on_the_air";
+  const baseUrl = "https://api.themoviedb.org/3/tv/on_the_air";
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_TOKEN}`,
   };
 
-  const response = await axios(url, { headers });
-  const data = response.data.results as CurrentSeries[];
+  const tvSeries = [];
+
+  for (let i = 1; i < 5; i++) {
+    const response = await axios(`${baseUrl}?page=${i}`, { headers });
+    const data = response.data.results as CurrentSeries[];
+    tvSeries.push(...data);
+  }
 
   return {
     props: {
-      tvSeries: data,
+      tvSeries,
     },
+    revalidate: 3600,
   };
 };
 
-const TVSeries: NextPage<Props> = (tvSeries) => {
+const TVSeries: NextPage<Props> = ({ tvSeries, searchTerm }) => {
   const { bookmarks } = useBookmarks();
   const isDesktop = useMediaQuery("(min-width: 1200px)");
 
+  const filteredTvSeries = tvSeries.filter((show) =>
+    show.name.toLowerCase().includes(searchTerm)
+  );
+
   return (
-    <Container maxWidth={isDesktop ? false : "lg"}>
+    <Container
+      maxWidth={isDesktop ? false : "lg"}
+      sx={{ paddingRight: { xl: 6 } }}
+    >
       <Heading sx={{ marginBottom: 5 }}>TV Series</Heading>
       <Grid container spacing={{ xs: 2, sm: 3 }}>
-        {tvSeries.tvSeries.map((show) => {
+        {filteredTvSeries.map((show) => {
           const { id, name, poster_path, first_air_date, vote_average } = show;
 
           const isBookmarked = Boolean(
@@ -60,6 +73,6 @@ const TVSeries: NextPage<Props> = (tvSeries) => {
       </Grid>
     </Container>
   );
-}
+};
 
-export default TVSeries
+export default TVSeries;

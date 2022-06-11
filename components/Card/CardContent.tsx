@@ -18,14 +18,14 @@ const CardContent = ({ releaseDate, title, rating, big, mediaType }: Props) => {
         position: big ? "absolute" : "static",
         bottom: "0",
         zIndex: 1,
-        padding: big ? "10px" : "1rem 0 0",
+        padding: big ? "1rem 1.5rem" : "1rem 0 0",
       }}
     >
       <Stack flexDirection="row" alignItems="center" gap={3}>
         {/* ----------------------- Release year ------------------------- */}
         <Typography
           variant="body2"
-          component="body"
+          component="span"
           color="#FFFFFF"
           fontWeight="light"
           sx={{
@@ -39,7 +39,7 @@ const CardContent = ({ releaseDate, title, rating, big, mediaType }: Props) => {
         {/* -------------------------- Rating ---------------------------- */}
         <Typography
           variant="body2"
-          component="body"
+          component="span"
           color="#FFFFFF"
           fontWeight="light"
           sx={{
@@ -57,7 +57,7 @@ const CardContent = ({ releaseDate, title, rating, big, mediaType }: Props) => {
         {/* --------------------------- Type --------------------------------*/}
         <Typography
           variant="body2"
-          component="body"
+          component="span"
           color="#FFFFFF"
           fontWeight="light"
           sx={{
@@ -92,7 +92,7 @@ const CardContent = ({ releaseDate, title, rating, big, mediaType }: Props) => {
       </Stack>
       {/* --------------------------- Title ------------------------------ */}
       <Typography
-        variant="body1"
+        variant="h6"
         color="text.primary"
         letterSpacing={0.75}
         sx={{ backgroundColor: "transparent", textShadow: "0 0 5px 5px #000" }}

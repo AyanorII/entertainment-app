@@ -1,5 +1,15 @@
-import { Avatar, Box, Container, Stack } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Menu,
+  MenuItem,
+  Stack,
+} from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { signOut } from "firebase/auth";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../lib/firebase";
 import Logo from "../Logo/Logo";
@@ -9,6 +19,15 @@ type Props = {};
 
 const Navbar = (props: Props) => {
   const [user, loading, error] = useAuthState(auth as any);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const links = [
     {
@@ -40,7 +59,7 @@ const Navbar = (props: Props) => {
         top: 0,
         zIndex: 10000,
         width: isDesktop ? "auto" : "100%",
-        backdropFilter: "blur(5px)"
+        backdropFilter: "blur(5px)",
       }}
     >
       <Box
@@ -53,8 +72,8 @@ const Navbar = (props: Props) => {
           justifyContent="space-between"
           alignItems="center"
           minHeight={{ xs: "auto", lg: "calc(100vh - 32px)" }}
-          p={ { xs: 2, sm: 3 } }
-          py={{lg: 5}}
+          p={{ xs: 2, sm: 3 }}
+          py={{ lg: 5 }}
         >
           {/* -------------------------- Logo ------------------------------ */}
           <Logo />
@@ -64,7 +83,7 @@ const Navbar = (props: Props) => {
             flexDirection={{ xs: "row", lg: "column" }}
             justifyContent="space-between"
             alignItems="center"
-            gap={3}
+            gap={ 3 }
           >
             {links.map(({ href, iconSrc }) => (
               <NavLink key={href} href={href} iconSrc={iconSrc} />
@@ -73,6 +92,7 @@ const Navbar = (props: Props) => {
           {/* ------------------------- Links ------------------------------ */}
           {/* ---------------------- User Avatar --------------------------- */}
           <Avatar
+            onClick={handleMenu}
             src={user!.photoURL!}
             alt={user!.displayName!}
             variant="circular"
@@ -82,6 +102,44 @@ const Navbar = (props: Props) => {
               border: "1px solid #FFFFFF85",
             }}
           />
+          <Menu
+            open={Boolean(anchorEl)}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            onClick={handleClose}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            PaperProps={{
+              elevation: 10,
+              sx: {
+                backgroundColor: "#29324b",
+                padding: { xs: 1 },
+                left: { lg: "100px !important" },
+                top: { xs: "90px !important", lg: "auto !important" },
+                bottom: { lg: "30px !important" },
+
+                "& > li": {
+                  padding: 1,
+                },
+              },
+            }}
+          >
+            <MenuItem>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => signOut(auth)}
+              >
+                Sign Out
+              </Button>
+            </MenuItem>
+          </Menu>
         </Stack>
         {/* ---------------------- User Avatar --------------------------- */}
       </Box>

@@ -1,14 +1,14 @@
 import { Box, GlobalStyles, Grid, ThemeProvider } from "@mui/material";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import ClipLoader from "react-spinners/ClipLoader";
 import AuthScreen from "../components/auth/AuthScreen";
 import Navbar from "../components/Navbar/Navbar";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { auth } from "../lib/firebase";
-import useBookmarks from "../lib/hooks/useBookmarks";
 import "../styles/globals.css";
 import theme from "../styles/Theme";
 
@@ -16,43 +16,79 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const pathname = router.asPath;
   const [user, userLoading, userError] = useAuthState(auth as any);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
 
   useEffect(() => {
-    if (!user && !userLoading && pathname !== "/signup") router.push("/login");
+    if (!user && !userLoading && pathname !== "/signup") {
+      router.push("/login");
+    }
   }, [pathname, userLoading]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles styles={styles} />
-      {userLoading && (
-        <Box sx={{ height: "100vh", display: "grid", placeItems: "center" }}>
-          <ClipLoader loading={userLoading} size={150} color="#FC4747" />
-        </Box>
-      )}
-      {!user && <AuthScreen />}
-      {user && (
-        <Grid container spacing={{ xs: 3, lg: 0 }}>
-          <Grid item sm={12} lg={1} position="relative">
-            <Navbar />
-          </Grid>
-          <Grid
-            container
-            item
-            xs={12}
-            lg={11}
-            gap={3}
-            marginTop={{ xs: 7, sm: 15, lg: 6 }}
-          >
-            <Grid item xs={12} justifyContent="start">
-              <SearchBar />
+    <>
+      <Head>
+        <title>Entertainment App | coded by Ayanori Rodrigo Toyoda</title>
+        <link rel="icon" href="/logo.ico" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="description"
+          content="Multi-page entertainment web app will using TMDB API, routing, state management, and search functionality. Challenge from Frontend Mentor website."
+        />
+        <meta
+          name="og:description"
+          content="Multi-page entertainment web app will using TMDB API, routing, state management, and search functionality. Challenge from Frontend Mentor website."
+        />
+        <meta
+          name="og:title"
+          content="Entertainment App | coded by Ayanori Rodrigo Toyoda"
+        />
+        <meta
+          name="og:image"
+          content="https://og-image.vercel.app/Entertainment%20App%20%7C%20coded%20by%20Ayanori%20Toyoda.png?theme=dark&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-white-logo.svg&images=https%3A%2F%2Fres.cloudinary.com%2Fdz209s6jk%2Fimage%2Fupload%2Fv1646923944%2FChallenges%2Fmaz79cid0jllq0js0qyi.jpg&widths=undefined&widths=750&heights=undefined&heights=500"
+        />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles styles={styles} />
+        {userLoading && (
+          <Box sx={{ height: "100vh", display: "grid", placeItems: "center" }}>
+            <ClipLoader loading={userLoading} size={150} color="#FC4747" />
+          </Box>
+        )}
+        {!user && !userLoading && <AuthScreen />}
+        {user && (
+          <Grid container spacing={{ xs: 3, lg: 0 }}>
+            <Grid item sm={12} lg={1} position="relative">
+              <Navbar />
             </Grid>
-            <Grid item xs={12}>
-              <Component {...pageProps} />
+            <Grid
+              container
+              item
+              xs={12}
+              lg={11}
+              gap={3}
+              marginTop={{ xs: 7, sm: 15, lg: 6 }}
+            >
+              <Grid item xs={12} justifyContent="start">
+                <SearchBar
+                  searchTerm={searchTerm}
+                  handleSearch={handleSearch}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Component
+                  {...pageProps}
+                  searchTerm={searchTerm.toLowerCase()}
+                />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      )}
-    </ThemeProvider>
+        )}
+      </ThemeProvider>
+    </>
   );
 }
 

@@ -1,17 +1,41 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Container, InputAdornment, useMediaQuery } from "@mui/material";
 import Input from "@mui/material/Input";
+import { useRouter } from "next/router";
+import { ChangeEvent } from "react";
 
-type Props = {};
+type Props = {
+  searchTerm: string;
+  handleSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+};
 
-const SearchBar = (props: Props) => {
+const SearchBar = ({ searchTerm, handleSearch }: Props) => {
   const isMobile = useMediaQuery("(max-width: 600px)");
+
+  const router = useRouter();
+  const pathname = router.asPath;
+
+  let placeholder;
+
+  switch (pathname) {
+    case "/movies":
+      placeholder = "Search for a movie";
+      break;
+    case "/tv":
+      placeholder = "Search for a TV show";
+      break;
+    default:
+      placeholder = "Search for a movie or TV Series";
+      break;
+  }
 
   return (
     <Container maxWidth={false}>
       <Input
-        placeholder="Search for movies or TV series"
-        sx={ {
+        value={searchTerm}
+        onChange={handleSearch}
+        placeholder={placeholder}
+        sx={{
           minWidth: isMobile ? "100%" : "400px",
           "&.MuiInputBase-root::after": {
             borderBottomColor: "#fff",

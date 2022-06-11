@@ -1,4 +1,5 @@
 import { Grid, Stack, Typography } from "@mui/material";
+import useBookmarks from "../../lib/hooks/useBookmarks";
 import CurrentMovies from "../../lib/types/CurrentMovies";
 import CurrentSeries from "../../lib/types/CurrentSeries";
 import Card from "../Card/Card";
@@ -9,7 +10,10 @@ type Props = {
 };
 
 const Similar = ({ similarMovies, similarShows }: Props) => {
+  const { bookmarks } = useBookmarks();
+
   return (
+
     <Stack gap={2} marginTop={{ xs: 8, md: 12 }}>
       <Typography
         variant="h4"
@@ -31,15 +35,19 @@ const Similar = ({ similarMovies, similarShows }: Props) => {
               release_date: releaseDate,
             } = movie;
 
+            const isBookmarked = Boolean(
+              bookmarks.find((bookmark) => bookmark.id === id)
+            );
+
             return (
-              <Grid key={id} item xs={6} sm={4} lg={3} xl={2}>
+              <Grid key={id} item xs={12} sm={6} lg={4} xl={3}>
                 <Card
                   id={id}
                   image={image!}
                   rating={rating}
                   releaseDate={releaseDate}
                   title={title}
-                  isBookmarked={false}
+                  isBookmarked={isBookmarked}
                   mediaType="movie"
                 />
               </Grid>
@@ -57,6 +65,10 @@ const Similar = ({ similarMovies, similarShows }: Props) => {
               first_air_date: releaseDate,
             } = movie;
 
+            const isBookmarked = Boolean(
+              bookmarks.find((bookmark) => bookmark.id === id)
+            );
+
             return (
               <Grid key={id} item xs={6} sm={4} lg={3}>
                 <Card
@@ -65,7 +77,7 @@ const Similar = ({ similarMovies, similarShows }: Props) => {
                   rating={rating}
                   releaseDate={releaseDate}
                   title={name}
-                  isBookmarked={false}
+                  isBookmarked={isBookmarked}
                   mediaType="tv"
                 />
               </Grid>
