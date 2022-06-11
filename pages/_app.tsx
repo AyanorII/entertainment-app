@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
           name="description"
-          content="Multi-page entertainment web app will using TMDB API, routing, state management, and search functionality. Challenge from Frontend Mentor website."
+          content="Multi-page entertainment web app using data from the TMDB API, routing, state management, and search functionality. Challenge from Frontend Mentor website."
         />
         <meta
           name="og:description"
