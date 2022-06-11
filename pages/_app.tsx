@@ -46,8 +46,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="og:title"
           content="Entertainment App | coded by Ayanori Rodrigo Toyoda"
         />
+        <meta name="author" content="Ayanori Rodrigo Toyoda" />
         <meta
           name="og:image"
+          property="og:image"
           content="https://og-image.vercel.app/Entertainment%20App%20%7C%20coded%20by%20Ayanori%20Toyoda.png?theme=dark&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-white-logo.svg&images=https%3A%2F%2Fres.cloudinary.com%2Fdz209s6jk%2Fimage%2Fupload%2Fv1646923944%2FChallenges%2Fmaz79cid0jllq0js0qyi.jpg&widths=undefined&widths=750&heights=undefined&heights=500"
         />
       </Head>
