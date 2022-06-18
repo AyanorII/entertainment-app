@@ -2,6 +2,7 @@ import { Box, GlobalStyles, Grid, ThemeProvider } from "@mui/material";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -90,6 +91,15 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Grid>
         )}
       </ThemeProvider>
+      <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
+      <noscript>
+        {/* eslint-disable @next/next/no-img-element */}
+        <img
+          src="https://queue.simpleanalyticscdn.com/noscript.gif"
+          alt=""
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </noscript>
     </>
   );
 }
