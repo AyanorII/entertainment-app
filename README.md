@@ -1,34 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Entertainment app
 
-First, run the development server:
+Full-stack entertainment app where users can see movies/tv-series details and bookmark them. Built using Next.js, Material UI and Firebase.
+You can check the original project idea from [Frontend Mentor](https://www.frontendmentor.io/challenges/entertainment-web-app-J-UhgAW1X/hub/entertainment-web-app-nBulvNnOL).
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Link to the **[project](https://entertainment-app-ayanori.vercel.app/)**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+**Client:** Next.js, Material UI, Firebase
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Screenshots
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![Login](https://i.postimg.cc/8P20TDrc/Screen-Shot-2022-10-27-at-11-43-41.png)
 
-## Deploy on Vercel
+![Home](https://i.postimg.cc/RFpgyzBM/Screen-Shot-2022-10-27-at-11-44-05.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Details](https://i.postimg.cc/cHLDFLP9/Screen-Shot-2022-10-27-at-11-44-29.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Movies](https://i.postimg.cc/pdZGQFc5/Screen-Shot-2022-10-27-at-11-44-50.png)
+
+![Bookmarks](https://i.postimg.cc/T1ytXHdn/Screen-Shot-2022-10-27-at-11-46-56.png)
+
+![Home mobile](https://i.postimg.cc/SKq1zrdp/Screen-Shot-2022-10-27-at-11-47-11.png)
+
+![Details mobile](https://i.postimg.cc/nhqwz5vk/Screen-Shot-2022-10-27-at-11-47-26.png)
