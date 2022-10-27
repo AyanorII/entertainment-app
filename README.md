@@ -9,7 +9,7 @@ Link to the **[project](https://entertainment-app-ayanori.vercel.app/)**
 
 ## Tech Stack
 
-**Client:** Next.js, Material UI, Firebase
+**Client:** TypeScript, Next.js, Material UI, Firebase
 
 
 
